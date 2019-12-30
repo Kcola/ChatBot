@@ -3,8 +3,10 @@ export default function ChatEntry({ newChat }) {
   const [chatVal, newChatVal] = useState([]);
   const handleSubmit = event => {
     event.preventDefault();
+    if(chatVal.length > 0)
     newChat("Kola", chatVal)
     document.getElementById("chatInput").value = "";
+    newChatVal("");
   }
   return (
     <div class="card-footer">
