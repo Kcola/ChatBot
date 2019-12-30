@@ -6,6 +6,7 @@ function ChatWindow() {
     enterChat([
       ...Chatlog,
       {
+        key: Chatlog.length,
         name: newName,
         chat: newChat,
         time:
@@ -16,7 +17,8 @@ function ChatWindow() {
           new Date().getSeconds()
       },
       {
-        name: 'Bot',
+        key: Chatlog.length + 1,
+        name: "Bot",
         chat: "You're Trash",
         time:
           new Date().getHours() +
@@ -26,14 +28,14 @@ function ChatWindow() {
           new Date().getSeconds()
       }
     ]);
-  }
+  };
   return (
     <div>
       <input onChange={event => newChatVal(event.target.value)}></input>
-      <button onClick={event => newChat('Kola', chatVal)}>Enter</button>
-        {Chatlog.map(chat => (
-          <p>{`${chat.time} ${chat.name} : ${chat.chat}`}</p>
-        ))}
+      <button onClick={event => newChat("Kola", chatVal)}>Enter</button>
+      {Chatlog.map(chat => (
+        <h3 key={chat.key}>{`${chat.time} ${chat.name} : ${chat.chat}`}</h3>
+      ))}
     </div>
   );
 }
