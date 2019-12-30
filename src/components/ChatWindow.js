@@ -34,7 +34,10 @@ function ChatWindow() {
       <input onChange={event => newChatVal(event.target.value)}></input>
       <button onClick={event => newChat("Kola", chatVal)}>Enter</button>
       {Chatlog.map(chat => (
-        <h3 key={chat.key}>{`${chat.time} ${chat.name} : ${chat.chat}`}</h3>
+        <h3
+          className={chat.name == "Bot" ? "reciever" : "sender"}
+          key={chat.key}
+        >{`${chat.time} ${chat.name} : ${chat.chat}`}</h3>
       ))}
     </div>
   );
