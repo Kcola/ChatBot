@@ -47,9 +47,13 @@ function App() {
             ":" +
             new Date().getMinutes()
         }
-      ]);}, 2000) 
+      ]); 
+      var objDiv = document.getElementById("msgBody");
+      objDiv.scrollTop = objDiv.scrollHeight;}, 2000) 
      }
-    
+     
+    var objDiv = document.getElementById("msgBody");
+    objDiv.scrollTop = objDiv.scrollHeight;
   }, [SubmitFired]) 
   return (
     <div class="card">
