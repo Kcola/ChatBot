@@ -1,14 +1,19 @@
 import React from "react";
 function ChatWindow({ Chatlog }) {
-  debugger;
   console.log(typeof Chatlog);
   return (
-    <div>
+    <div class="card-body msg_card_body">
       {Chatlog.map(chat => (
-        <h3
-          className={chat.name === "Bot" ? "reciever" : "sender"}
-          key={chat.key}
-        >{`${chat.time} ${chat.name} : ${chat.chat}`}</h3>
+        <div
+          className={chat.name === "Bot" ? "d-flex justify-content-start mb-4" : "d-flex justify-content-end mb-4"}
+          key={chat.key}>
+          <div className="img_cont_msg">
+            <img src={chat.name === "Bot" ? "https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" : "logo512.png"}
+              className="rounded-circle user_img_msg" />
+          </div>
+          <div className="msg_cotainer">{`${chat.chat}`}<span className="msg_time">{`${chat.time} , Today`}</span>
+          </div>
+        </div>
       ))}
     </div>
   );
