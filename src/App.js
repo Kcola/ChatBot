@@ -46,7 +46,7 @@ function App() {
     } else {
       async function BotApi() {
         showLoading(true);
-        const response = await fetch("http://52.15.39.6:5000/send", {
+        const response = await fetch("http://18.222.211.255:5000/send", {
           method: "POST",
           body: JSON.stringify({ chat: Chatlog[Chatlog.length - 1].chat })
         });
