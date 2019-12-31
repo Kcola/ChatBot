@@ -41,7 +41,7 @@ function App() {
           method: 'POST',
           body: JSON.stringify({ chat: Chatlog[Chatlog.length - 1].chat })
         });
-        const data = response.json();
+        const data = await response.json();
         console.log(data);
         //This is where you I will call your API.
         enterChat([
