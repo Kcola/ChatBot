@@ -1,8 +1,7 @@
 import React from "react";
 function ChatWindow({ Chatlog }) {
-  console.log(typeof Chatlog);
   return (
-    <div id ="msgBody" class="card-body msg_card_body">
+    <div id="msgBody" className="card-body msg_card_body">
       {Chatlog.map(chat => (
         <div
           className={chat.name === "Bot" ? "d-flex justify-content-start mb-4" : "d-flex justify-content-end mb-4"}
