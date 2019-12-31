@@ -12,33 +12,42 @@ function App() {
         key: Chatlog.length,
         name: newName,
         chat: newChat,
-        time:
-          new Date().getHours() +
-          ":" +
-          new Date().getMinutes()
+        time: new Date().getHours() + ":" + new Date().getMinutes()
       }
     ]);
   };
+  const showLoading = loading => {
+    if (loading === true) {
+      enterChat([
+        ...Chatlog,
+        {
+          key: Chatlog.length,
+          name: "loading",
+          chat:
+            '<div style="margin-bottom: -35px; margin-top: 6px;" class="sk-flow"><div class="sk-flow-dot"></div><div class="sk-flow-dot"></div><div class="sk-flow-dot"></div></div>',
+          time: new Date().getHours() + ":" + new Date().getMinutes()
+        }
+      ]);
+    } else {
+      Chatlog.splice(-1, 1);
+    }
+  };
   useEffect(() => {
-
     if (SubmitFired == 0) {
       enterChat([
         ...Chatlog,
         {
           key: Chatlog.length,
-          name: 'Bot',
+          name: "Bot",
           chat: "Welcome to the chat room, I'm Bot",
-          time:
-            new Date().getHours() +
-            ":" +
-            new Date().getMinutes()
+          time: new Date().getHours() + ":" + new Date().getMinutes()
         }
       ]);
-    }
-    else {
+    } else {
       async function BotApi() {
+        showLoading(true);
         const response = await fetch("http://52.15.39.6:5000/send", {
-          method: 'POST',
+          method: "POST",
           body: JSON.stringify({ chat: Chatlog[Chatlog.length - 1].chat })
         });
         const data = await response.json();
@@ -47,37 +56,36 @@ function App() {
           ...Chatlog,
           {
             key: Chatlog.length,
-            name: 'Bot',
+            name: "Bot",
             chat: data.bot_response,
-            time:
-              new Date().getHours() +
-              ":" +
-              new Date().getMinutes()
+            time: new Date().getHours() + ":" + new Date().getMinutes()
           }
         ]);
         var objDiv = document.getElementById("msgBody");
-        objDiv.scrollTop = objDiv.scrollHeight
+        objDiv.scrollTop = objDiv.scrollHeight;
+        showLoading(false);
       }
       BotApi();
     }
 
     var objDiv = document.getElementById("msgBody");
-    objDiv.scrollTop = objDiv.scrollHeight
-  }, [SubmitFired])
+    if (objDiv != null) objDiv.scrollTop = objDiv.scrollHeight;
+  }, [SubmitFired]);
   return (
     <div className="card">
       <div className="card-header msg_head">
         <div className="d-flex bd-highlight">
           <div className="img_cont">
-            <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" className="rounded-circle user_img" />
+            <img
+              src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+              className="rounded-circle user_img"
+            />
             <span className="online_icon"></span>
           </div>
 
           <div className="user_info">
             <span>Chat with Bot</span>
           </div>
-
-
         </div>
       </div>
       <ChatWindow Chatlog={Chatlog} />
