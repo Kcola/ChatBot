@@ -37,12 +37,11 @@ function App() {
     }
     else {
       async function BotApi() {
-        const response = await fetch("http://127.0.0.1:5000/send", {
+        const response = await fetch("http://52.15.39.6:5000/send", {
           method: 'POST',
           body: JSON.stringify({ chat: Chatlog[Chatlog.length - 1].chat })
         });
         const data = await response.json();
-        console.log(data);
         //This is where you I will call your API.
         enterChat([
           ...Chatlog,
