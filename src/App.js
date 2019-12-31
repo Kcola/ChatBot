@@ -46,7 +46,7 @@ function App() {
     } else {
       async function BotApi() {
         showLoading(true);
-        const response = await fetch("http://18.222.211.255:5000/send", {
+        const response = await fetch("http://18.223.152.188:5000/send", {
           method: "POST",
           body: JSON.stringify({ chat: Chatlog[Chatlog.length - 1].chat })
         });
@@ -65,12 +65,11 @@ function App() {
       }
       BotApi();
     }
-
   }, [SubmitFired]);
   useEffect(() => {
     var objDiv = document.getElementById("msgBody");
     objDiv.scrollTop = objDiv.scrollHeight;
-  })
+  });
   return (
     <div className="card">
       <div className="card-header msg_head">
