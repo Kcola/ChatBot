@@ -1,1 +1,1 @@
-React chatbot with Flask server api.
+React chatbot with custom Flask server api.
