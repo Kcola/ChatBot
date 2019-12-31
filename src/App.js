@@ -52,7 +52,7 @@ function App() {
         });
         const data = await response.json();
         //This is where you I will call your API.
-        enterChat([
+        await enterChat([
           ...Chatlog,
           {
             key: Chatlog.length,
@@ -61,16 +61,16 @@ function App() {
             time: new Date().getHours() + ":" + new Date().getMinutes()
           }
         ]);
-        var objDiv = document.getElementById("msgBody");
-        objDiv.scrollTop = objDiv.scrollHeight;
         showLoading(false);
       }
       BotApi();
     }
 
-    var objDiv = document.getElementById("msgBody");
-    if (objDiv != null) objDiv.scrollTop = objDiv.scrollHeight;
   }, [SubmitFired]);
+  useEffect(() => {
+    var objDiv = document.getElementById("msgBody");
+    objDiv.scrollTop = objDiv.scrollHeight;
+  })
   return (
     <div className="card">
       <div className="card-header msg_head">
