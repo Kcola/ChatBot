@@ -17,7 +17,7 @@ function ChatWindow({ Chatlog }) {
             <img
               src={
                 chat.name === "Bot" || chat.name === "loading"
-                  ? "https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                  ? "Bot.jpeg"
                   : "logo512.png"
               }
               className="rounded-circle user_img_msg"

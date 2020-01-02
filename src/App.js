@@ -33,6 +33,7 @@ function App() {
     }
   };
   useEffect(() => {
+    var data;
     if (SubmitFired == 0) {
       enterChat([
         ...Chatlog,
@@ -46,11 +47,17 @@ function App() {
     } else {
       async function BotApi() {
         showLoading(true);
-        const response = await fetch("http://18.223.152.188:5000/send", {
-          method: "POST",
-          body: JSON.stringify({ chat: Chatlog[Chatlog.length - 1].chat })
-        });
-        const data = await response.json();
+
+        try {
+          const response = await fetch("http://18.223.152.188:5000/send", {
+            method: "POST",
+            body: JSON.stringify({ chat: Chatlog[Chatlog.length - 1].chat })
+          });
+          data = await response.json();
+        } catch (error) {
+          data = { bot_response: "Server is down try again later" };
+        }
+
         //This is where you I will call your API.
         await enterChat([
           ...Chatlog,
@@ -75,10 +82,7 @@ function App() {
       <div className="card-header msg_head">
         <div className="d-flex bd-highlight">
           <div className="img_cont">
-            <img
-              src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-              className="rounded-circle user_img"
-            />
+            <img src="Bot.jpeg" className="rounded-circle user_img" />
             <span className="online_icon"></span>
           </div>
 
