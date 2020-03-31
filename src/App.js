@@ -49,7 +49,7 @@ function App() {
         showLoading(true);
 
         try {
-          const response = await fetch("http://18.223.152.188:5000/send", {
+          const response = await fetch("https://flaskchatbot.azurewebsites.net/send", {
             method: "POST",
             body: JSON.stringify({ chat: Chatlog[Chatlog.length - 1].chat })
           });
