@@ -1,1 +1,1 @@
-React chatbot with custom Flask server api.
+Chatbot frontend (React).
