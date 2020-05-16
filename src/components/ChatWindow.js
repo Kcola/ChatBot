@@ -4,8 +4,15 @@ import "./spinkit.min.css";
 function ChatWindow({ Chatlog }) {
   return (
     <div id="msgBody" className="card-body msg_card_body">
-      {Chatlog.map(chat => (
+      {Chatlog.map((chat) => (
         <div
+          data-time={chat.time}
+          name={
+            chat.name === "Bot" || chat.name === "loading"
+              ? "bubble-sender"
+              : "bubble-reciever"
+          }
+          data-time={chat.time}
           className={
             chat.name === "Bot" || chat.name === "loading"
               ? "d-flex justify-content-start mb-4"
@@ -24,11 +31,10 @@ function ChatWindow({ Chatlog }) {
             />
           </div>
           <div
+            data-time={chat.time}
             className="msg_cotainer"
             dangerouslySetInnerHTML={{
-              __html:
-                `${chat.chat}` +
-                `<span class="msg_time">${chat.time} , Today</span>`
+              __html: `${chat.chat}`,
             }}
           ></div>
         </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 export default function ChatEntry({ newChat }) {
   const [chatVal, newChatVal] = useState([]);
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     if (chatVal.length > 0) newChat("Kola", chatVal);
     document.getElementById("chatInput").value = "";
@@ -12,8 +12,8 @@ export default function ChatEntry({ newChat }) {
       <form onSubmit={handleSubmit}>
         <div className="input-group">
           <textarea
-            autocomplete="false"
-            onChange={event => newChatVal(event.target.value)}
+            autoComplete="false"
+            onChange={(event) => newChatVal(event.target.value)}
             id="chatInput"
             className="form-control type_msg"
             placeholder="Type your message..."

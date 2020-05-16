@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ChatWindow from "./components/ChatWindow";
 import ChatEntry from "./components/ChatEntry";
+import "./App.css";
 function App() {
   const [Chatlog, enterChat] = useState([]);
   const [SubmitFired, SetSubmitFired] = useState([]);
@@ -12,11 +13,11 @@ function App() {
         key: Chatlog.length,
         name: newName,
         chat: newChat,
-        time: new Date().getHours() + ":" + new Date().getMinutes()
-      }
+        time: new Date().getHours() + ":" + new Date().getMinutes(),
+      },
     ]);
   };
-  const showLoading = loading => {
+  const showLoading = (loading) => {
     if (loading === true) {
       enterChat([
         ...Chatlog,
@@ -25,8 +26,8 @@ function App() {
           name: "loading",
           chat:
             '<div style="margin-bottom: -35px; margin-top: 6px;" class="sk-flow"><div class="sk-flow-dot"></div><div class="sk-flow-dot"></div><div class="sk-flow-dot"></div></div>',
-          time: new Date().getHours() + ":" + new Date().getMinutes()
-        }
+          time: new Date().getHours() + ":" + new Date().getMinutes(),
+        },
       ]);
     } else {
       Chatlog.splice(-1, 1);
@@ -41,29 +42,34 @@ function App() {
           key: Chatlog.length,
           name: "Bot",
           chat: "Welcome to the chat room, I'm Bot",
-          time: new Date().getHours() + ":" + new Date().getMinutes()
-        }
+          time: new Date().getHours() + ":" + new Date().getMinutes(),
+        },
       ]);
     } else {
       async function BotApi() {
         showLoading(true);
 
         try {
-          const response = await fetch("https://benjaminbotman.azurewebsites.net/qnamaker/knowledgebases/5632106f-b384-4d61-87d6-93cfc9bc2275/generateAnswer", {
-            method: "POST",
-            headers:{
-              "Content-Type": "application/json",
-              Authorization: "EndpointKey 25b4213b-5dff-40cd-9bfb-7595051ed0a8"
-            },
-            body: JSON.stringify({ question: Chatlog[Chatlog.length - 1].chat })
-          });
+          const response = await fetch(
+            "https://benjaminbotman.azurewebsites.net/qnamaker/knowledgebases/5632106f-b384-4d61-87d6-93cfc9bc2275/generateAnswer",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization:
+                  "EndpointKey 25b4213b-5dff-40cd-9bfb-7595051ed0a8",
+              },
+              body: JSON.stringify({
+                question: Chatlog[Chatlog.length - 1].chat,
+              }),
+            }
+          );
 
           data = { bot_response: "Server is down try again later" };
           let responseObject = (await response.json()).answers;
-          debugger
-          data = {bot_response:responseObject[0].answer};
-          if(data.bot_response === "No good match found in KB.")
-          data = {bot_response:"English pls"};
+          data = { bot_response: responseObject[0].answer };
+          if (data.bot_response === "No good match found in KB.")
+            data = { bot_response: "English pls" };
         } catch (error) {
           data = { bot_response: "Server is down try again later" };
         }
@@ -75,8 +81,8 @@ function App() {
             key: Chatlog.length,
             name: "Bot",
             chat: data.bot_response,
-            time: new Date().getHours() + ":" + new Date().getMinutes()
-          }
+            time: new Date().getHours() + ":" + new Date().getMinutes(),
+          },
         ]);
         showLoading(false);
       }
