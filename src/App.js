@@ -49,11 +49,21 @@ function App() {
         showLoading(true);
 
         try {
-          const response = await fetch("https://flaskchatbot.azurewebsites.net/send", {
+          const response = await fetch("https://benjaminbotman.azurewebsites.net/qnamaker/knowledgebases/5632106f-b384-4d61-87d6-93cfc9bc2275/generateAnswer", {
             method: "POST",
-            body: JSON.stringify({ chat: Chatlog[Chatlog.length - 1].chat })
+            headers:{
+              "Content-Type": "application/json",
+              Authorization: "EndpointKey 25b4213b-5dff-40cd-9bfb-7595051ed0a8"
+            },
+            body: JSON.stringify({ question: Chatlog[Chatlog.length - 1].chat })
           });
-          data = await response.json();
+
+          data = { bot_response: "Server is down try again later" };
+          let responseObject = (await response.json()).answers;
+          debugger
+          data = {bot_response:responseObject[0].answer};
+          if(data.bot_response === "No good match found in KB.")
+          data = {bot_response:"English pls"};
         } catch (error) {
           data = { bot_response: "Server is down try again later" };
         }
