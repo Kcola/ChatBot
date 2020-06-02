@@ -51,13 +51,13 @@ function App() {
 
         try {
           const response = await fetch(
-            "https://benjaminbotman.azurewebsites.net/qnamaker/knowledgebases/5632106f-b384-4d61-87d6-93cfc9bc2275/generateAnswer",
+            "https://bennybot.azurewebsites.net/qnamaker/knowledgebases/6bcd07c7-3306-4796-9e55-ef0a95b9def9/generateAnswer",
             {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
                 Authorization:
-                  "EndpointKey 25b4213b-5dff-40cd-9bfb-7595051ed0a8",
+                  "EndpointKey 493fc59e-fec6-4096-8010-dbcd666e7ae3",
               },
               body: JSON.stringify({
                 question: Chatlog[Chatlog.length - 1].chat,
